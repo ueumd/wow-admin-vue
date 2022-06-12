@@ -7,6 +7,8 @@ import AutoImport from 'unplugin-auto-import/vite'
 // 自动按需导入组件和注册组件
 import Components from 'unplugin-vue-components/vite'
 
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -42,6 +44,7 @@ export default defineConfig({
       dirs: ["src/components"], // 要导入组件的目录的路径
       deep: true, // 搜索子目录
       dts: "src/components/components.d.ts", // 运行后会自动生成 `components.d.ts` 全局声明
+      resolvers: [ElementPlusResolver()] // ElementPlus按需加载
     })
   ]
 })
