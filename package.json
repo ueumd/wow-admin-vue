@@ -12,7 +12,10 @@
     "prettier": "prettier --config .prettierrc.js --write ./src/**/*"
   },
   "dependencies": {
-    "vue": "^3.2.25"
+    "element-plus": "^2.2.5",
+    "pinia": "^2.0.14",
+    "vue": "^3.2.25",
+    "vue-router": "^4.0.16"
   },
   "devDependencies": {
     "@types/node": "^17.0.42",

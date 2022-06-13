@@ -1,3 +1,5 @@
-import App from './App.vue'
-
-createApp(App).mount('#app')
+import useStore, { pinia } from './store'
+import AppElement from './App.vue'
+const app = createApp(AppElement)
+app.use(pinia)
+app.mount('#app')
