@@ -12,8 +12,10 @@
     "prettier": "prettier --config .prettierrc.js --write ./src/**/*"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.0.4",
     "element-plus": "^2.2.5",
     "pinia": "^2.0.14",
+    "sass": "^1.52.3",
     "vue": "^3.2.25",
     "vue-router": "^4.0.16"
   },
