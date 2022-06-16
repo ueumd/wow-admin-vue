@@ -9,9 +9,9 @@ declare module '@vue/runtime-core' {
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElHeader: typeof import('element-plus/es')['ElHeader']
     ElMain: typeof import('element-plus/es')['ElMain']
-    HelloWorld: typeof import('./HelloWorld.vue')['default']
-    NotFound: typeof import('./NotFound/NotFound.vue')['default']
-    ParentView: typeof import('./ParentView/ParentView.vue')['default']
+    HelloWorld: typeof import('./components/HelloWorld.vue')['default']
+    NotFound: typeof import('./components/NotFound/NotFound.vue')['default']
+    ParentView: typeof import('./components/ParentView/ParentView.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

@@ -42,7 +42,7 @@ export default defineConfig({
     Components({
       dirs: ['src/components'], // 要导入组件的目录的路径
       deep: true, // 搜索子目录
-      dts: 'src/components/components.d.ts', // 运行后会自动生成 `components.d.ts` 全局声明
+      dts: 'src/components.d.ts', // 运行后会自动生成 `components.d.ts` 全局声明
       resolvers: [ElementPlusResolver()] // ElementPlus按需加载
     })
   ],
