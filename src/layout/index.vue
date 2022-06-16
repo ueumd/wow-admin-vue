@@ -1,17 +1,30 @@
+<!-- src\layout\AppLayout.vue -->
 <template>
-  <div class="common-layout">
-    <el-scrollbar height="100vh">
-      <el-container>
-        <el-aside :style="`--el-aside-width: ${!store.collapse ? '200px' : '55px'}`">fff</el-aside>
-      </el-container>
-    </el-scrollbar>
-  </div>
+  <el-container>
+    <el-aside width="200px"> Aside left</el-aside>
+    <el-container>
+      <el-header>Header top</el-header>
+      <el-main class="el-main">
+        <router-view />
+      </el-main>
+    </el-container>
+  </el-container>
 </template>
 
-<script>
-export default {
-  name: 'index'
-}
-</script>
+<script setup lang="ts"></script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.el-container {
+  height: 100vh;
+}
+.el-header {
+  background-color: #b3c0d1;
+}
+.el-aside {
+  width: auto;
+  background-color: #304156;
+}
+.el-main {
+  background-color: #e9eef3;
+}
+</style>

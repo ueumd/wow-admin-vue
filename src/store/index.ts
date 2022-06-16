@@ -1,4 +1,4 @@
-import system from './user'
+import user from './user'
 import test from './test'
 
 const pinia = createPinia()
@@ -16,7 +16,7 @@ export { pinia }
 // 统一导出 useStore 方法
 export default function useStore() {
   return {
-    system: system(),
+    user: user(),
     test: test()
   }
 }

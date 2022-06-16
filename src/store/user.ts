@@ -2,6 +2,7 @@ export default defineStore({
   id: 'user',
   state: () => {
     return {
+      collapse: false,
       name: '张三',
       token: 'token...'
     }

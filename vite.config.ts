@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import * as path from 'path'
 
 // 自动导入composition api 和 生成全局typescript说明
 import AutoImport from 'unplugin-auto-import/vite'
@@ -44,5 +45,19 @@ export default defineConfig({
       dts: 'src/components/components.d.ts', // 运行后会自动生成 `components.d.ts` 全局声明
       resolvers: [ElementPlusResolver()] // ElementPlus按需加载
     })
-  ]
+  ],
+  resolve: {
+    // src目录别名
+    alias: {
+      '@': path.resolve(__dirname, 'src')
+    }
+  },
+  css: {
+    preprocessorOptions: {
+      // css 全局变量
+      scss: {
+        additionalData: '@import "@/styles/variables.scss";'
+      }
+    }
+  }
 })

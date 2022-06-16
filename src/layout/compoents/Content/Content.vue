@@ -1,9 +1,11 @@
-<template></template>
+<template>
+  <div class="content">
+    <router-view v-slot="{ Component }">
+      <component :is="Component" />
+    </router-view>
+  </div>
+</template>
 
-<script>
-export default {
-  name: 'Content'
-}
-</script>
+<script lang="ts" setup></script>
 
-<style scoped></style>
+<style scoped lang="scss"></style>
