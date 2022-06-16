@@ -8,6 +8,11 @@ const Routers: RouteRecordRaw[] = [
     component: () => import('@/components/NotFound/NotFound.vue')
   },
   {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/view/login/index.vue')
+  },
+  {
     path: '/',
     name: 'Layout',
     component: Layout,

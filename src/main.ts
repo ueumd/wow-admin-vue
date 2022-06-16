@@ -13,8 +13,6 @@ import 'element-plus/theme-chalk/el-loading.css'
 import 'element-plus/theme-chalk/el-message-box.css'
 import 'element-plus/theme-chalk/el-message.css'
 
-import locale from 'element-plus/lib/locale/lang/zh-cn'
-
 const app = createApp(AppElement)
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
@@ -24,6 +22,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 app.use(ElementPlus, {
   locale: zhCn
 })
+
 app.use(pinia)
 app.use(router)
 app.mount('#app')
