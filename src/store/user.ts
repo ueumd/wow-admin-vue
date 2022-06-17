@@ -9,6 +9,7 @@ export default defineStore({
   state: () => {
     return {
       collapse: false,
+      navList: [],
       name: '张三',
       userinfo: null as ({ token: string } & IUserInfo) | null,
       token: 'token...'
