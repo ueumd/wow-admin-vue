@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <el-form class="login-form" :rules="rules" ref="form" :model="user" size="medium" @submit.prevent="handleSubmit">
+    <el-form class="login-form" ref="ruleFormRef" :rules="rules" :model="user" size="medium">
       <div class="login-form__header">Wow App login</div>
       <el-form-item prop="account">
         <el-input v-model="user.account" size="large" placeholder="请输入用户名" prefix-icon="UserFilled" />
@@ -9,19 +9,63 @@
         <el-input v-model="user.pwd" type="password" size="large" placeholder="请输入密码" prefix-icon="Key" />
       </el-form-item>
       <el-form-item>
-        <el-button class="submit-button" type="primary" size="large" :loading="loading" native-type="submit"
-          >登录</el-button
+        <el-button
+          class="submit-button"
+          type="primary"
+          size="large"
+          :loading="loading"
+          native-type="submit"
+          @click="handleSubmit(ruleFormRef)"
         >
+          登录
+        </el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script lang="ts" setup>
+import type { FormInstance, FormRules } from 'element-plus'
+
+import { useLocalStorage } from '@/hooks/useLocalStorage'
+
+const { setLocalStorage } = useLocalStorage()
+
+const router = useRouter()
+const route = useRoute()
+
+const loading = ref(false)
+const ruleFormRef = ref<FormInstance>()
+
+const rules = reactive<FormRules>({
+  account: [{ required: true, message: '请输入账号', trigger: 'change' }],
+  pwd: [
+    { required: true, message: '请输入密码', trigger: 'change' },
+    { min: 6, max: 18, message: '密码最小6位，最大18位', trigger: 'blur' }
+  ]
+})
+
 const user = reactive({
   account: 'admin',
   pwd: '123456'
 })
+
+const handleSubmit = async (formEl: FormInstance | undefined) => {
+  console.log(router, route)
+  if (!formEl) return
+  await formEl.validate((valid, fields) => {
+    if (valid) {
+      ElMessage.success('登录成功')
+      setLocalStorage(
+        'token',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODFkMzU1ZWJkNzA1OGE3ZTkzYzgyYyIsImlhdCI6MTY1NTQyODA5Nn0.u6c3gAbCkXdFYEkKwEcbd6NUzgm-C-QuM9iwVElJt74'
+      )
+      setLocalStorage('uid', '6281d355ebd7058a7e93c82c')
+    } else {
+      console.log('error submit!', fields)
+    }
+  })
+}
 </script>
 
 <style lang="scss" scoped>

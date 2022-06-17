@@ -9,13 +9,16 @@ const Routers: RouteRecordRaw[] = [
   },
   {
     path: '/login',
-    name: 'login',
+    name: 'Login',
     component: () => import('@/view/login/index.vue')
   },
   {
     path: '/',
     name: 'Layout',
     component: Layout,
+    meta: {
+      requiresAuth: true
+    },
     children: [
       {
         path: '',
