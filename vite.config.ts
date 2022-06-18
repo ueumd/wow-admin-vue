@@ -40,9 +40,6 @@ export default defineConfig({
       dts: true // 根目录自动生成auto-import.d.ts  "src/auto-import.d.ts"  生成 `auto-import.d.ts` 全局声明
     }),
     Components({
-      dirs: ['src/components'], // 要导入组件的目录的路径
-      deep: true, // 搜索子目录
-      dts: './components.d.ts', // 运行后会自动生成 `components.d.ts` 全局声明
       resolvers: [ElementPlusResolver()] // ElementPlus按需加载
     })
   ],

@@ -1,5 +1,5 @@
 import user from './user'
-import test from './test'
+import layout from './layout'
 
 const pinia = createPinia()
 
@@ -17,6 +17,6 @@ export { pinia }
 export default function useStore() {
   return {
     user: user(),
-    test: test()
+    layout: layout()
   }
 }

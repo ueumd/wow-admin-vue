@@ -1,12 +1,13 @@
 import { RouteRecordRaw } from 'vue-router'
 import Layout from '../layout/index.vue'
+import bookRoutes from './book'
 
 const Routers: RouteRecordRaw[] = [
-  {
-    path: '/:pathMatch(.*)*',
-    name: '404',
-    component: () => import('@/components/NotFound/NotFound.vue')
-  },
+  // {
+  //   path: '/:pathMatch(.*)*',
+  //   name: '404',
+  //   component: () => import('@/components/NotFound/NotFound.vue')
+  // },
   {
     path: '/login',
     name: 'Login',
@@ -16,15 +17,16 @@ const Routers: RouteRecordRaw[] = [
     path: '/',
     name: 'Layout',
     component: Layout,
-    meta: {
-      requiresAuth: true
-    },
     children: [
       {
         path: '',
         name: 'home',
+        meta: {
+          title: '首页'
+        },
         component: () => import('@/view/home/index.vue')
-      }
+      },
+      bookRoutes
     ]
   }
 ]

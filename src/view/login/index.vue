@@ -77,7 +77,7 @@ const handleSubmit = async (formEl: FormInstance | undefined) => {
   align-items: center;
   background-color: #f38f69;
   //background-image: url('https://img.zcool.cn/community/0180pvfwtqn4f3ltzhlwlo3035.jpg?x-oss-process=image/auto-orient,1/resize,m_lfit,w_3000,limit_1/sharpen,100');
-  background-image: url('https://img.zcool.cn/community/01mopmrflkgjjxpheykgxt3139.jpg?x-oss-process=image/auto-orient,1/resize,m_lfit,w_3000,limit_1/sharpen,100');
+  background-image: url('@/assets/login_bg.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -87,7 +87,7 @@ const handleSubmit = async (formEl: FormInstance | undefined) => {
   min-width: 350px;
   padding: 30px;
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.8);
   box-shadow: 0px 6px 5px 2px rgb(126, 54, 34, 0.4);
 
   .login-form__header {

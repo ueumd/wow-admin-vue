@@ -1,28 +1,21 @@
 interface IUserInfo {
   id: number
-  account: string
-  head_pic: string
+  username: string
 }
 
 export default defineStore({
   id: 'user',
   state: () => {
     return {
-      collapse: false,
-      navList: [],
-      name: '张三',
-      userinfo: null as ({ token: string } & IUserInfo) | null,
+      userinfo: {
+        username: 'test'
+      },
       token: 'token...'
     }
   },
-  getters: {
-    fullName: (state) => {
-      return state.name + '丰'
-    }
-  },
   actions: {
-    updateName(name: string) {
-      this.name = name
+    setUser(payload: any) {
+      this.userinfo = payload
     }
   }
 })
