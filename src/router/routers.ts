@@ -3,11 +3,11 @@ import Layout from '../layout/index.vue'
 import bookRoutes from './book'
 
 const Routers: RouteRecordRaw[] = [
-  // {
-  //   path: '/:pathMatch(.*)*',
-  //   name: '404',
-  //   component: () => import('@/components/NotFound/NotFound.vue')
-  // },
+  {
+    path: '/:pathMatch(.*)*',
+    name: '404',
+    component: () => import('@/components/NotFound/NotFound.vue')
+  },
   {
     path: '/login',
     name: 'Login',
@@ -19,7 +19,7 @@ const Routers: RouteRecordRaw[] = [
     component: Layout,
     children: [
       {
-        path: '',
+        path: '/',
         name: 'home',
         meta: {
           title: '首页'

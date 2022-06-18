@@ -1,4 +1,4 @@
-import useStore, { pinia } from './store'
+import pinia from './store'
 import AppElement from './App.vue'
 import router from './router/index'
 

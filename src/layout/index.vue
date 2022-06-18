@@ -17,11 +17,12 @@ import Menu from './components/Menu/index.vue'
 .el-container {
   height: 100vh;
 }
-
 .el-header {
-  height: $navBarHeight;
+  height: 94px;
+  padding: 0;
   color: #333;
   background-color: #fff;
+  cursor: pointer;
 }
 
 .el-aside {

@@ -11,10 +11,10 @@ const pinia = createPinia()
   return app
 }*/
 
-export { pinia }
+export default pinia
 
 // 统一导出 useStore 方法
-export default function useStore() {
+export function useStore() {
   return {
     user: user(),
     layout: layout()
