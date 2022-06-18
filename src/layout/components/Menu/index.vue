@@ -1,9 +1,10 @@
 <template>
   <Logo />
   <el-menu
-    default-active="2"
+    default-active="/book/list"
     :collapse="store.layout.isCollapse"
-    class="el-menu-vertical"
+    class="el-menu-vertical-demo"
+    background-color="#191a23"
     router
     @open="handleOpen"
     @close="handleClose"
@@ -12,7 +13,7 @@
       <el-icon><HomeFilled /></el-icon>
       <span>首页</span>
     </el-menu-item>
-    <el-sub-menu index="/book">
+    <el-sub-menu :popper-offset="2" index="/book">
       <template #title>
         <el-icon><Notebook /></el-icon>
         <span>书籍管理</span>
@@ -53,6 +54,7 @@ const store = useStore()
 
 .el-menu {
   background: transparent;
+  border-right: none;
   ::v-deep(.el-menu) {
     background: transparent;
   }
@@ -84,6 +86,6 @@ const store = useStore()
 
 .el-menu-item.is-active {
   color: white;
-  background: #2d8cf0;
+  background: #2d8cf0 !important;
 }
 </style>
