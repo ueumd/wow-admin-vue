@@ -1,37 +1,39 @@
 <template>
   <Logo />
   <el-menu
-    default-active="/book/list"
+    :default-active="current"
     :collapse="store.layout.isCollapse"
-    class="el-menu-vertical-demo"
+    class="el-menu-vertical"
     background-color="#191a23"
     router
     @open="handleOpen"
     @close="handleClose"
   >
-    <el-menu-item index="/">
+    <el-menu-item index="/home">
       <el-icon><HomeFilled /></el-icon>
       <span>首页</span>
     </el-menu-item>
-    <el-sub-menu :popper-offset="2" index="/book">
-      <template #title>
-        <el-icon><Notebook /></el-icon>
-        <span>书籍管理</span>
-      </template>
-      <el-menu-item index="/book/list">书籍列表</el-menu-item>
-      <el-menu-item index="/book/test">测试</el-menu-item>
-      <el-sub-menu index="1-4">
-        <template #title>item four</template>
-        <el-menu-item index="1-4-1">item one</el-menu-item>
-      </el-sub-menu>
-    </el-sub-menu>
+    <template v-for="(item, index) of store.layout.userRouters" :key="index">
+      <MenuItem :index="(index + 1).toString()" :collapse="store.layout.isCollapse" :item="item" />
+    </template>
   </el-menu>
 </template>
 
 <script lang="ts" setup>
+import MenuItem from './MenuItem.vue'
 import Logo from './Logo.vue'
 import { useStore } from '@/store'
+
+const router = useRouter()
 const store = useStore()
+const current = computed(() => router.currentRoute.value.path)
+
+const handleOpen = (key: string, keyPath: string[]) => {
+  console.log(key, keyPath)
+}
+const handleClose = (key: string, keyPath: string[]) => {
+  console.log(key, keyPath)
+}
 </script>
 
 <style lang="scss" scoped>
@@ -51,39 +53,6 @@ const store = useStore()
     background: #191a23;
   }
 }
-
-.el-menu {
-  background: transparent;
-  border-right: none;
-  ::v-deep(.el-menu) {
-    background: transparent;
-  }
-}
-// 二级
-.el-sub-menu {
-  ::v-deep(.el-menu-item) {
-    background: #101117;
-    &:hover {
-      color: white;
-    }
-
-    ::v-deep(.el-sub-menu__title) {
-      color: rgba(255, 255, 255, 0.7);
-      &:hover {
-        color: white;
-        background: #191a23;
-      }
-    }
-  }
-  ::v-deep(.el-sub-menu__title) {
-    color: rgba(255, 255, 255, 0.7);
-    &:hover {
-      color: white;
-      background: #191a23;
-    }
-  }
-}
-
 .el-menu-item.is-active {
   color: white;
   background: #2d8cf0 !important;

@@ -1,12 +1,12 @@
 <template>
   <div class="login-container">
-    <el-form class="login-form" ref="ruleFormRef" :rules="rules" :model="user" size="medium">
-      <div class="login-form__header">Wow App login</div>
-      <el-form-item prop="account">
-        <el-input v-model="user.account" size="large" placeholder="请输入用户名" prefix-icon="UserFilled" />
+    <el-form class="login-form" ref="ruleFormRef" :rules="rules" :model="user" size="large">
+      <div class="login-form__header">Wow login</div>
+      <el-form-item prop="username">
+        <el-input v-model="user.username" size="large" placeholder="请输入用户名" prefix-icon="UserFilled" />
       </el-form-item>
-      <el-form-item prop="pwd">
-        <el-input v-model="user.pwd" type="password" size="large" placeholder="请输入密码" prefix-icon="Key" />
+      <el-form-item prop="password">
+        <el-input v-model="user.password" type="password" size="large" placeholder="请输入密码" prefix-icon="Key" />
       </el-form-item>
       <el-form-item>
         <el-button
@@ -25,42 +25,45 @@
 </template>
 
 <script lang="ts" setup>
+import flux from '@/core/index'
+import router from '@/router/'
 import type { FormInstance, FormRules } from 'element-plus'
 
-import { useLocalStorage } from '@/hooks/useLocalStorage'
-
-const { setLocalStorage } = useLocalStorage()
-
-const router = useRouter()
-const route = useRoute()
+const { api, util } = flux
 
 const loading = ref(false)
 const ruleFormRef = ref<FormInstance>()
 
 const rules = reactive<FormRules>({
-  account: [{ required: true, message: '请输入账号', trigger: 'change' }],
-  pwd: [
+  username: [{ required: true, message: '请输入账号', trigger: 'change' }],
+  password: [
     { required: true, message: '请输入密码', trigger: 'change' },
     { min: 6, max: 18, message: '密码最小6位，最大18位', trigger: 'blur' }
   ]
 })
 
 const user = reactive({
-  account: 'admin',
-  pwd: '123456'
+  username: 'admin',
+  password: '123456'
 })
 
 const handleSubmit = async (formEl: FormInstance | undefined) => {
-  console.log(router, route)
   if (!formEl) return
   await formEl.validate((valid, fields) => {
     if (valid) {
-      ElMessage.success('登录成功')
-      setLocalStorage(
-        'token',
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODFkMzU1ZWJkNzA1OGE3ZTkzYzgyYyIsImlhdCI6MTY1NTQyODA5Nn0.u6c3gAbCkXdFYEkKwEcbd6NUzgm-C-QuM9iwVElJt74'
-      )
-      setLocalStorage('uid', '6281d355ebd7058a7e93c82c')
+      api.user
+        .login(user)
+        .then((res: any) => {
+          ElMessage.success('登录成功')
+          util.storage.set('token', res.token)
+          util.storage.set('uid', res.uid)
+          router.push({
+            name: 'Home'
+          })
+        })
+        .catch((err: any) => {
+          console.error(err.message)
+        })
     } else {
       console.log('error submit!', fields)
     }

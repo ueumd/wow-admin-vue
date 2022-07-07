@@ -9,8 +9,15 @@ module.exports = {
       jsx: true
     }
   },
-  extends: ['plugin:vue/vue3-strongly-recommended', 'plugin:@typescript-eslint/recommended', 'prettier', 'plugin:prettier/recommended'],
-
+  extends: [
+    'plugin:vue/vue3-strongly-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
+    'plugin:prettier/recommended'
+  ],
+  globals: {
+    flux: 'readonly'
+  },
   rules: {
     // override/add rules settings here, such as:
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',

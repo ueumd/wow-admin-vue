@@ -27,7 +27,7 @@ pnpm serve
 - 打包
 
 ```bash
-pnpm build
+npm dev
 ```
 
 ## Git 贡献提交规范

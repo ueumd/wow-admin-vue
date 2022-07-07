@@ -46,7 +46,7 @@ export default defineConfig({
   resolve: {
     // src目录别名
     alias: {
-      '@': path.resolve(__dirname, 'src')
+      '@': path.join(__dirname, './src')
     }
   },
   css: {
@@ -54,6 +54,62 @@ export default defineConfig({
       // css 全局变量
       scss: {
         additionalData: '@import "@/styles/variables.scss";'
+      }
+    }
+  },
+  server: {
+    // 是否自动打开浏览器
+    open: true,
+    // 服务器主机名，如果允许外部访问，可设置为"0.0.0.0"
+    host: '0.0.0.0',
+    // 服务器端口号
+    port: 3000,
+    // 设为 true ,若端口已被占用则会直接退出，而不是尝试下一个可用端口
+    strictPort: false,
+    // 为开发服务器配置 CORS
+    cors: true,
+    // 设置为 true 强制使依赖预构建
+    force: true,
+    // 代理
+    proxy: {
+      '/web': {
+        target: '', // test
+        changeOrigin: true
+        // rewrite: (path) => path.replace(/^\/web/, '')
+        /*  pathRewrite: {
+          '^/api/internal': '/internal' // pro
+        }*/
+      }
+    }
+  },
+  // build
+  /*build: {
+    // 压缩
+    minify: 'esbuild',
+    assetsDir: '',
+    outDir: `./dist`,
+    // 进行压缩计算
+    brotliSize: false
+  },*/
+  build: {
+    outDir: 'dist',
+    minify: 'terser',
+    rollupOptions: {
+      output: {
+        assetFileNames: '[ext]/[name].[hash].[ext]',
+        chunkFileNames: 'js/[name].[hash].js',
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return id.toString().split('node_modules/')[1].split('/')[0].toString()
+          }
+        }
+      }
+    },
+    terserOptions: {
+      compress: {
+        keep_infinity: true,
+        drop_console: true,
+        drop_debugger: true
       }
     }
   }

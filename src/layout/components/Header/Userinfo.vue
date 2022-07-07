@@ -14,11 +14,11 @@
 
 <script lang="ts" setup>
 import { useStore } from '@/store'
+import flux from '@/core/index'
 const store = useStore()
 const router = useRouter()
 
 const handleLogout = () => {
-  console.log(111)
   // 退出提示
   ElMessageBox.confirm('确认退出吗？', '退出提示', {
     confirmButtonText: '确定',
@@ -26,13 +26,12 @@ const handleLogout = () => {
     type: 'warning'
   })
     .then(async () => {
-      console.log(2222222222)
       // 确认发出退出请求
       // 清除用户登录信息
       store.user.setUser(null)
 
-      localStorage.removeItem('token')
-      localStorage.removeItem('uid')
+      flux.util.storage.remove('token')
+      flux.util.storage.remove('uid')
 
       ElMessage({
         type: 'success',

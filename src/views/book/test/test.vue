@@ -10,6 +10,7 @@ const open1 = () => {
   ElMessage('this is a message.')
 }
 const open2 = () => {
+  console.log(11111111)
   ElMessage({
     message: 'Congrats, this is a success message.',
     type: 'success'

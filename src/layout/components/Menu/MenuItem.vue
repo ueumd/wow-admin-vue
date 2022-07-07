@@ -1,42 +1,96 @@
 <template>
-  <el-sub-menu v-if="menu.children && menu.children.length" :index="menu.path">
+  <el-sub-menu v-if="item.children && item.children.length >= 1" :index="index + Date.now()">
     <template #title>
-      <app-icon v-if="menu.icon" :name="menu.icon" color="rgba(255, 255, 255, 0.7)" />
-      <span>{{ menu.title }}</span>
+      <el-icon>
+        <component :is="item.meta.icon"></component>
+      </el-icon>
+      <span v-show="!collapse"> {{ item.meta.title }}</span>
     </template>
-    <MenuItem v-for="subMenu in menu.children" :key="subMenu.path" :menu="subMenu" />
+    <div v-for="(c, i) of item.children" :key="i">
+      <menu-item :index="(i + 1).toString()" :item="c"></menu-item>
+    </div>
   </el-sub-menu>
-  <el-menu-item v-else :index="menu.path">
-    <app-icon v-if="menu.icon" :name="menu.icon" color="rgba(255, 255, 255, 0.7)" />
-    <template #title>
-      <span>{{ menu.title }}</span>
-    </template>
+
+  <el-menu-item v-else-if="item.children && item.children.length === 1" :index="item.children[0].path">
+    <el-icon>
+      <component :is="item.children[0].meta.icon"></component>
+    </el-icon>
+    <template #title> {{ item.children[0].title }}</template>
+  </el-menu-item>
+
+  <el-menu-item v-else-if="item && item.pid !== 0" :index="item.path">
+    <el-icon>
+      <component :is="item.meta.icon"></component>
+    </el-icon>
+    <template #title>{{ item.meta.title }}</template>
   </el-menu-item>
 </template>
 
-<script lang="ts" setup>
-const props = defineProps({
-  menu: {
-    type: Object as PropType<IMenu>,
-    required: true
+<script lang="ts">
+export default defineComponent({
+  name: 'MenuItem',
+  props: {
+    index: {
+      type: String,
+      default: ''
+    },
+    item: {
+      type: Object,
+      default() {
+        return {}
+      }
+    },
+    collapse: {
+      type: Boolean
+    }
   }
 })
-
-const menu = ref(props.menu)
 </script>
 
 <style lang="scss" scoped>
-i.Ionicons {
-  margin-right: 12px;
+// 一级导航
+.el-menu-item {
+  color: rgba(255, 255, 255, 0.7);
+  &:hover {
+    color: white;
+    background: #191a23;
+  }
 }
 
-.el-submenu .el-menu-item,
-.el-submenu :deep(.el-submenu) .el-submenu__title {
-  background-color: #1f2d3d !important;
+.el-menu {
+  background: transparent;
+  border-right: none;
+  ::v-deep(.el-menu) {
+    background: transparent;
+  }
+}
+// 二级
+.el-sub-menu {
+  ::v-deep(.el-menu-item) {
+    background: #101117;
+    &:hover {
+      color: white;
+    }
+
+    ::v-deep(.el-sub-menu__title) {
+      color: rgba(255, 255, 255, 0.7);
+      &:hover {
+        color: white;
+        background: #191a23;
+      }
+    }
+  }
+  ::v-deep(.el-sub-menu__title) {
+    color: rgba(255, 255, 255, 0.7);
+    &:hover {
+      color: white;
+      background: #191a23;
+    }
+  }
 }
 
-.el-submenu .el-menu-item:hover,
-.el-submenu :deep(.el-submenu) .el-submenu__title:hover {
-  background-color: #001528 !important;
+.el-menu-item.is-active {
+  color: white;
+  background: #2d8cf0 !important;
 }
 </style>

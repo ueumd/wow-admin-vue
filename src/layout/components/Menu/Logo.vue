@@ -1,13 +1,13 @@
 <template>
   <div class="rowCC logo">
-    <el-avatar :size="50" :fit="fit" :src="logo" />
-    <span v-if="!store.layout.isCollapse">WowApp</span>
+    <el-avatar :size="30" shape="square" fit :src="logo" />
+    <span v-if="!store.layout.isCollapse">Wow Admin</span>
   </div>
 </template>
-<script setup>
+<script lang="ts" setup>
+import logo from '@/assets/logo.png'
 import { useStore } from '@/store'
 const store = useStore()
-import logo from '@/assets/logo.png'
 </script>
 <style lang="scss" scoped>
 .logo {
@@ -19,5 +19,6 @@ import logo from '@/assets/logo.png'
 }
 .el-avatar {
   background: none;
+  margin-right: 10px;
 }
 </style>

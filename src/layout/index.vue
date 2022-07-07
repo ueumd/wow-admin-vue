@@ -3,12 +3,14 @@
     <el-aside> <Menu /> </el-aside>
     <el-container>
       <el-header class="el-header"><Header /></el-header>
-      <el-main class="el-main"><router-view /></el-main>
+      <!--      <el-main class="el-main"><router-view /></el-main>-->
+      <el-main class="el-main"> <Content /></el-main>
     </el-container>
   </el-container>
 </template>
 
 <script setup lang="ts">
+import Content from './components/Content/Content.vue'
 import Header from './components/Header/index.vue'
 import Menu from './components/Menu/index.vue'
 </script>
@@ -18,7 +20,7 @@ import Menu from './components/Menu/index.vue'
   height: 100vh;
 }
 .el-header {
-  height: 94px;
+  height: 85px;
   padding: 0;
   color: #333;
   background-color: #fff;
@@ -34,5 +36,6 @@ import Menu from './components/Menu/index.vue'
 .el-main {
   background-color: #e9eef3;
   color: #333;
+  padding: 15px;
 }
 </style>

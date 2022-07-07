@@ -14,7 +14,7 @@
       </el-space>
     </div>
   </div>
-  <div class="nav-list plr20">nav</div>
+  <NavListTag />
 </template>
 <script lang="ts" setup>
 import ToggleSidebar from './ToggleSidebar.vue'
@@ -22,6 +22,7 @@ import Breadcrumb from './Breadcrumb.vue'
 import FullScreen from './FullScreen.vue'
 import Notification from './Notification.vue'
 import Userinfo from './Userinfo.vue'
+import NavListTag from './NavListTag.vue'
 </script>
 <style lang="scss" scoped>
 .plr20 {
@@ -32,9 +33,5 @@ import Userinfo from './Userinfo.vue'
   padding-right: 20px;
   height: $navBarHeight;
   box-shadow: 0 1px 4px rgb(0 21 41 / 8%);
-}
-.nav-list {
-  height: 44px;
-  background: #f5f7f9;
 }
 </style>
