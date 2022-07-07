@@ -1,6 +1,12 @@
 # wow-app
 基于 Vite + Vue3 + Pinia + Element Plus的后台管理系统模板
 
+<p>
+  <img src="login.png" />
+  <img src="main.png" />
+</p>
+
+
 ## 安装使用
 
 - 获取项目代码
@@ -47,3 +53,4 @@ npm dev
     - `wip` 开发中
     - `mod` 不确定分类的修改
     - `release` 发布
+
