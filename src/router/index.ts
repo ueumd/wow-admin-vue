@@ -13,6 +13,7 @@ const router = createRouter({
   routes
 })
 
+// @todo 后期可以考虑白名单
 enum LOGIN_STATE {
   IS_LOGIN = 'Login'
 }
@@ -48,7 +49,6 @@ router.beforeEach(async (to, from, next) => {
       const newRoutes = generateRouter(store.layout.userRouters)
       const layout = routes.find((item: RouteRecordRaw) => item.name == 'Layout')!
       layout.children = [...generatorRouters, ...newRoutes]
-      console.log(layout)
       router.addRoute(layout)
       router.replace(to.path)
     }
