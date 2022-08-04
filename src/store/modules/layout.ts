@@ -1,4 +1,4 @@
-import { IMenuItem, INavItem, ITreeMenuItem } from '@/api/types/menu'
+import { IMenuItem, INavItem, ITreeMenuItem } from '@/interface/menu'
 import flux from '@/core'
 export default defineStore({
   id: 'layout',
@@ -51,6 +51,9 @@ export default defineStore({
     cloneOtherNav(currentPath: string) {
       this.navList = [{ title: '首页', path: '/' }]
       this.setNavList(currentPath)
+    },
+    resetNavList() {
+      this.navList = [{ title: '首页', path: '/' }]
     }
   }
 })

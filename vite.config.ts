@@ -68,40 +68,21 @@ export default defineConfig({
       }
     }
   },
-  server: {
-    // 是否自动打开浏览器
-    open: true,
-    // 服务器主机名，如果允许外部访问，可设置为"0.0.0.0"
-    host: '0.0.0.0',
-    // 服务器端口号
-    port: 3000,
-    // 设为 true ,若端口已被占用则会直接退出，而不是尝试下一个可用端口
-    strictPort: false,
-    // 为开发服务器配置 CORS
-    cors: true,
-    // 设置为 true 强制使依赖预构建
-    force: true,
-    // 代理
-    proxy: {
-      '/web': {
-        target: '', // test
-        changeOrigin: true
-        // rewrite: (path) => path.replace(/^\/web/, '')
-        /*  pathRewrite: {
-          '^/api/internal': '/internal' // pro
-        }*/
-      }
-    }
-  },
-  // build
-  /*build: {
-    // 压缩
-    minify: 'esbuild',
-    assetsDir: '',
-    outDir: `./dist`,
-    // 进行压缩计算
-    brotliSize: false
-  },*/
+  // server: {
+  //   // 是否自动打开浏览器
+  //   open: true,
+  //   // 服务器主机名，如果允许外部访问，可设置为"0.0.0.0"
+  //   host: '0.0.0.0',
+  //   // 服务器端口号
+  //   port: 3000,
+  //   // 设为 true ,若端口已被占用则会直接退出，而不是尝试下一个可用端口
+  //   strictPort: false,
+  //   // 为开发服务器配置 CORS
+  //   cors: true,
+  //   // 设置为 true 强制使依赖预构建
+  //   force: true,
+  //   // 代理
+  // },
   build: {
     outDir: 'dist',
     minify: 'terser',

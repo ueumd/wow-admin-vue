@@ -1,7 +1,10 @@
 <template>
   <div class="login-container">
     <el-form class="login-form" ref="ruleFormRef" :rules="rules" :model="user" size="large">
-      <div class="login-form__header">Wow login</div>
+      <div class="login-form__header">
+        <img width="40" height="40" :src="logo" />
+        <span>WowAdmin</span>
+      </div>
       <el-form-item prop="username">
         <el-input v-model="user.username" size="large" placeholder="请输入用户名" prefix-icon="UserFilled" />
       </el-form-item>
@@ -25,11 +28,15 @@
 </template>
 
 <script lang="ts" setup>
+import logo from '@/assets/buildadmin.png'
 import flux from '@/core/index'
 import router from '@/router/'
+
 import type { FormInstance, FormRules } from 'element-plus'
 
-const { api, util } = flux
+import { IUserLoginRes } from '@/interface/user'
+
+const { api, util, store } = flux
 
 const loading = ref(false)
 const ruleFormRef = ref<FormInstance>()
@@ -53,22 +60,27 @@ const handleSubmit = async (formEl: FormInstance | undefined) => {
     if (valid) {
       api.user
         .login(user)
-        .then((res: any) => {
+        .then((res: IUserLoginRes) => {
           ElMessage.success('登录成功')
+          store.user.setUserinfo(res)
           util.storage.set('token', res.token)
           util.storage.set('uid', res.uid)
-          router.push({
-            name: 'Home'
-          })
+          router.push({ path: '/home' })
         })
         .catch((err: any) => {
-          console.error(err.message)
+          console.error(err)
         })
     } else {
       console.log('error submit!', fields)
     }
   })
 }
+
+onMounted(() => {
+  api.user.apiTest().then((res: any) => {
+    console.log('api test: ', res)
+  })
+})
 </script>
 
 <style lang="scss" scoped>
@@ -79,7 +91,6 @@ const handleSubmit = async (formEl: FormInstance | undefined) => {
   justify-content: center;
   align-items: center;
   background-color: #f38f69;
-  //background-image: url('https://img.zcool.cn/community/0180pvfwtqn4f3ltzhlwlo3035.jpg?x-oss-process=image/auto-orient,1/resize,m_lfit,w_3000,limit_1/sharpen,100');
   background-image: url('@/assets/login_bg.jpg');
   background-repeat: no-repeat;
   background-position: center;
@@ -90,7 +101,7 @@ const handleSubmit = async (formEl: FormInstance | undefined) => {
   min-width: 350px;
   padding: 30px;
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.9);
   box-shadow: 0px 6px 5px 2px rgb(126, 54, 34, 0.4);
 
   .login-form__header {
@@ -98,8 +109,11 @@ const handleSubmit = async (formEl: FormInstance | undefined) => {
     justify-content: center;
     align-items: center;
     padding-bottom: 30px;
-    font-size: 30px;
-    font-weight: 500;
+    font-size: 26px;
+    font-weight: bold;
+    img{
+      margin-right: 10px;
+    }
   }
 
   .el-form-item:last-child {

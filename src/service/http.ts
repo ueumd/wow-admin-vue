@@ -4,7 +4,7 @@ import router from '@/router/'
 
 function createAxios(options = {}) {
   const defaultOptions = {
-    baseURL: 'http://121.5.53.216/',
+    baseURL: '',
     timeout: 12000
   }
   const service = axios.create({
@@ -34,14 +34,14 @@ function reqResolve(config: AxiosRequestConfig) {
     return config
   }
 
-  const token = util.localStorage.storage.token
+  const token = util.storage.get('token')
   if (!token) {
     /**
      * * 未登录或者token过期的情况下
      * * 跳转登录页重新登录，携带当前路由及参数，登录成功会回到原来的页面
      */
     router.push({
-      name: 'Login'
+      path: '/login'
     })
     return Promise.reject({ code: '-1', message: '未登录' })
   }
@@ -62,7 +62,10 @@ function reqReject(error: Error) {
 
 // 响应拦截
 function repResolve(response: AxiosResponse) {
-  return response?.data
+  if (response.status === 200 && response?.data.code === 0) {
+    return response?.data.data
+  }
+  return Promise.reject('')
 }
 
 // 响应拦截错误处理

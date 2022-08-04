@@ -1,9 +1,8 @@
 import { RouteRecordRaw, RouterView } from 'vue-router'
-import { ITreeMenuItem } from '@/api/types/menu'
 /**
  * 方便开发时静态路由处理
  */
-export const staticRoutes = [
+export const staticRoutes: RouteRecordRaw[] = [
   {
     path: 'book',
     component: RouterView,

@@ -1,7 +1,7 @@
 <template>
   <el-dropdown>
     <span class="el-dropdown-link">
-      <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" />
+      <el-avatar :src="avatar" />
     </span>
     <template #dropdown>
       <el-dropdown-menu>
@@ -13,9 +13,8 @@
 </template>
 
 <script lang="ts" setup>
-import { useStore } from '@/store'
 import flux from '@/core/index'
-const store = useStore()
+import avatar from '@/assets/avatar.png'
 const router = useRouter()
 
 const handleLogout = () => {
@@ -25,22 +24,15 @@ const handleLogout = () => {
     cancelButtonText: '取消',
     type: 'warning'
   })
-    .then(async () => {
+    .then(() => {
       // 确认发出退出请求
       // 清除用户登录信息
-      store.user.setUser(null)
-
-      flux.util.storage.remove('token')
-      flux.util.storage.remove('uid')
-
-      ElMessage({
-        type: 'success',
-        message: '退出成功!'
-      })
-
-      // 跳转到登录页
-      router.push({
-        path: '/login'
+      flux.api.user.logout().then(() => {
+        ElMessage({ type: 'success', message: '退出成功!' })
+        // 跳转到登录页
+        router.push({
+          path: '/login'
+        })
       })
     })
     .catch(() => {
@@ -52,4 +44,4 @@ const handleLogout = () => {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style></style>

@@ -1,6 +1,8 @@
-import { post } from '@/service/http'
-import { IUserLoginReq, IUserLoginRes } from '@/api/types/user'
-import { IMenuItem } from '@/api/types/menu'
+import { post, get } from '@/service/http'
+import { IUserLoginReq, IUserLoginRes } from '@/interface/user'
+import { IMenuItem } from '@/interface/menu'
+
+import flux from '@/core'
 
 /**
  * Login
@@ -14,41 +16,34 @@ export const login = (data: IUserLoginReq) => {
 }
 
 /**
+ * logout
+ */
+export const logout = () => {
+  return get({
+    url: '/web/api/logout'
+  }).then(() => {
+    flux.store.layout.resetNavList()
+    flux.store.user.resetUserinfo()
+    flux.util.storage.remove('token')
+    flux.util.storage.remove('uid')
+    return
+  })
+}
+
+// api test
+export const apiTest = () => {
+  return get({
+    url: '/web/api/test'
+  })
+}
+
+/**
  * @description 获取用户菜单
  * @param uid
  */
 export async function getUserMenu(uid: string) {
-  // return post<IMenuItem[]>({
-  //   url: '/getUserMenu',
-  //   data: { uid }
-  // })
-  return <IMenuItem[]>[
-    {
-      _id: '6281cf1b1424d9aa31b7a234',
-      rid: 3,
-      pid: 0,
-      path: '/book',
-      name: 'Book',
-      icon: 'goods',
-      title: '书籍管理'
-    },
-    {
-      _id: '6281cf1b1424d9aa31b7aqq1',
-      rid: 4,
-      pid: 3,
-      path: '/book/list',
-      name: 'BookList',
-      icon: 'AddLocation',
-      title: '书籍列表'
-    },
-    {
-      _id: '6281cf1b1424d9aa31b7a51e',
-      rid: 5,
-      pid: 3,
-      path: '/book/test',
-      name: 'BookTest',
-      icon: 'List',
-      title: '测试'
-    }
-  ]
+  return post<IMenuItem[]>({
+    url: '/web/api/user/getUserMenu',
+    data: { uid }
+  })
 }

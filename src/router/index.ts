@@ -4,7 +4,7 @@ import 'nprogress/nprogress.css'
 import util from '@/utils/index'
 import routes, { generatorRouters } from './routers'
 import { useStore } from '@/store'
-import { ITreeMenuItem } from '@/api/types/menu'
+import { ITreeMenuItem } from '@/interface/menu'
 
 const modules = import.meta.glob('../views/**/**.vue')
 
@@ -76,6 +76,7 @@ const generateRouter = (userRouters: ITreeMenuItem[]) => {
     const routes: RouteRecordRaw = {
       path: router.path,
       name: router.name,
+      children: [] as RouteRecordRaw[],
       meta: {
         title: router.title,
         icon: router.icon

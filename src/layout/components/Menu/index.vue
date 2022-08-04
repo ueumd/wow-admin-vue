@@ -41,7 +41,7 @@ const handleClose = (key: string, keyPath: string[]) => {
   border-right: none;
   background: #191a23;
   &:not(.el-menu--collapse) {
-    width: 200px;
+    width: 220px;
     min-height: 400px;
   }
 }

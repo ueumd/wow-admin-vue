@@ -1,11 +1,11 @@
 <template>
   <div class="rowCC logo">
     <el-avatar :size="30" shape="square" fit :src="logo" />
-    <span v-if="!store.layout.isCollapse">Wow Admin</span>
+    <span v-if="!store.layout.isCollapse">WowAdmin</span>
   </div>
 </template>
 <script lang="ts" setup>
-import logo from '@/assets/logo.png'
+import logo from '@/assets/buildadmin.png'
 import { useStore } from '@/store'
 const store = useStore()
 </script>
