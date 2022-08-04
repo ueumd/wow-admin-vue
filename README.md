@@ -1,39 +1,25 @@
 # wow-app
 基于 Vite + Vue3 + Pinia + Element Plus的后台管理系统模板
 
-<p>
-  <img src="login.png" />
-  <img src="main.png" />
-</p>
+## support
+- Vue3
+- JSX
+- Vite3
+- Pinia
+- Typescript
+- SCSS
+- Element Plus
+- Axios
+- 集成 Eslint + Stylelint + Prettier 来规范和格式化代码
+- 集成 Mock 辅助开发
 
-
-## 安装使用
-
-- 获取项目代码
-
-```bash
-git clone https://github.com/ueumd/wow-app.git
-```
-
-- 安装依赖
+## usage
 
 ```bash
-cd wow-app
+git clone https://github.com/ueumd/wow-admin-vue.git
 
-pnpm install
-
-```
-
-- 运行
-
-```bash
-pnpm serve
-```
-
-- 打包
-
-```bash
-npm dev
+pnpm i
+pnpm dev
 ```
 
 ## Git 贡献提交规范
@@ -53,4 +39,9 @@ npm dev
     - `wip` 开发中
     - `mod` 不确定分类的修改
     - `release` 发布
+
+<p>
+  <img src="login.png" />
+  <img src="main.png" />
+</p>
 

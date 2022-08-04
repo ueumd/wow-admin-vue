@@ -10,6 +10,8 @@ import Components from 'unplugin-vue-components/vite'
 
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
+import { viteMockServe } from 'vite-plugin-mock'
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -38,6 +40,15 @@ export default defineConfig({
         globalsPropValue: true // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
       },
       dts: true // 根目录自动生成auto-import.d.ts  "src/auto-import.d.ts"  生成 `auto-import.d.ts` 全局声明
+    }),
+    viteMockServe({
+      logger: true,
+      watchFiles: true, // 监视文件更改
+      mockPath: 'mock', // 解析根目录下的mock文件夹
+      supportTs: true, // 打开后，可以读取 ts 文件模块。
+      localEnabled: true,
+      prodEnabled: true, // 生产打包开关
+      injectCode: ` import { setupProdMockServer } from './mockProdServer'; setupProdMockServer(); `
     }),
     Components({
       resolvers: [ElementPlusResolver()] // ElementPlus按需加载
