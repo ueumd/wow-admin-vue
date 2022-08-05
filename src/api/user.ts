@@ -47,3 +47,9 @@ export async function getUserMenu(uid: string) {
     data: { uid }
   })
 }
+
+export const resource = () => {
+  return get({
+    url: '/web/api/user/resource'
+  })
+}

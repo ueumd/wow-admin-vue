@@ -21,3 +21,40 @@ body,
   overflow: hidden;
   position: relative;
 }
+
+
+// footer pagination style
+.footer-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $containerBg;
+  height: 60px;
+  &__demonstration {
+    margin-left: 10px;
+    color: $white;
+  }
+
+  .el-pager li.active + li {
+    /* border-left: 0; */
+    border: 1px solid #dddddd;
+  }
+
+  li{
+    border: 1px solid #dddddd;
+    background-color: #FFFFFF !important;
+    box-sizing: border-box;
+
+    &.active{
+      border: none;
+      background: $colorPrimary !important;
+      color: #FFFFFF !important;
+      margin-right: 20px;
+    }
+  }
+}
+
+.paginationStyle {
+  position: relative;
+  left: 0px;
+}

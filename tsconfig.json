@@ -18,7 +18,7 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "auto-imports.d.ts"],
-  "exclude": ["node_modules"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue",  "mock/**/*", "auto-imports.d.ts"],
+  "exclude": ["node_modules", "dist"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
