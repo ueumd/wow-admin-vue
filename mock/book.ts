@@ -3,19 +3,19 @@ import type { MockMethod } from 'vite-plugin-mock'
 export default [
   {
     url: '/web/api/book/getBookList',
-    method: 'get',
+    method: 'post',
     response: ({ body }) => {
       return {
         code: 0,
         msg: 'success',
         data: {
-          currentPage: 1,
-          numPerPage: 10,
-          totalCount: 17,
+          currentPage: body.currentPage,
+          numPerPage: body.numPerPage,
+          totalCount: 200,
           recordList: [
             {
               id: 16,
-              merchName: '苏特里',
+              merchName: '苏特里' + Date.now(),
               author: '[美] 科马克·麦卡锡',
               merchType: 'vr_teaching_aids',
               merchTypeName: '教辅',
@@ -146,7 +146,7 @@ export default [
             }
           ],
           pageCount: 2,
-          listCount: 10
+          listCount: 200
         }
       }
     }

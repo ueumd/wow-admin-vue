@@ -19,11 +19,20 @@
 ```bash
 git clone https://github.com/ueumd/wow-admin-vue.git
 
+## dev
 pnpm i
 pnpm dev
+
+## prod
+pnpm run build
+cd dist
+http-server
 ```
 
 <p>
-  <img src="login.png" />
-  <img src="main.png" />
+  <img src="login.jpeg" />
+  <img src="main.jpeg" />
 </p>
+
+## Related items
+- React版本：[wow-admin-react](https://github.com/ueumd/wow-admin-react.git)

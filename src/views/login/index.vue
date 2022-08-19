@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts" setup>
-import logo from '@/assets/buildadmin.png'
+import logo from '@/assets/logo.svg'
 import flux from '@/core/index'
 import router from '@/router/'
 

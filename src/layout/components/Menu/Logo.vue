@@ -5,7 +5,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import logo from '@/assets/buildadmin.png'
+import logo from '@/assets/logo.svg'
 import { useStore } from '@/store'
 const store = useStore()
 </script>

@@ -13,10 +13,10 @@
     </el-table>
     <card-paging
       :total-count="state.pageInfo.totalCount"
-      :num-per-page="state.pageInfo.numPerPage"
+      :page-size="state.pageInfo.numPerPage"
       :current-page="state.pageInfo.currentPage"
       @on-size-change="handleSizeChange"
-      @on-page-change="handleCurrentChange"
+      @on-current-change="handleCurrentChange"
     />
     <el-dialog v-model="dialogVisible" title="Tips" width="30%" draggable>
       <edit-book :book="state.curBook" @on-update-book-info="onUpdateBookInfo" />
@@ -43,7 +43,7 @@ const pageInfo: IPageInfo = {
   // 每页页数
   numPerPage: 10,
   // 当前页数
-  currentPage: 0
+  currentPage: 1
 }
 
 // 包装成一个对象
@@ -52,15 +52,25 @@ const state = reactive({
   curBook: {}
 })
 
+let currentPageRef = toRef(state.pageInfo, 'currentPage')
+
 onMounted(() => {
   getBookList()
 })
 
 function getBookList() {
-  api.book.getBookList().then((res: any) => {
-    state.pageInfo = res
-    loading.value = false
-  })
+  loading.value = false
+  api.book
+    .getBookList({
+      currentPage: state.pageInfo.currentPage,
+      numPerPage: state.pageInfo.numPerPage
+    })
+    .then((res: IPageInfo) => {
+      state.pageInfo = res
+    })
+    .finally(() => {
+      loading.value = false
+    })
 }
 
 function editRow(item: IBook) {
@@ -83,10 +93,14 @@ function onUpdateBookInfo(book: IBook) {
 }
 
 function handleSizeChange(val: number) {
-  console.log(`${val} items per page`)
+  // console.log(`${val} items per page`)
+  state.pageInfo.numPerPage = val
+  getBookList()
 }
 function handleCurrentChange(val: number) {
-  console.log(`current page: ${val}`)
+  // console.log(`current page: ${val}`)
+  state.pageInfo.currentPage = val
+  getBookList()
 }
 </script>
 

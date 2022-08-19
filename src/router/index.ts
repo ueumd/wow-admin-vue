@@ -26,7 +26,6 @@ router.beforeEach(async (to, from, next) => {
 
   const token = util.storage.get('token') || false
   const uid = util.storage.get('uid') || ''
-
   if (!token && to.name === LOGIN_STATE.IS_LOGIN) {
     // 未登录 去的是登录页面
     next()

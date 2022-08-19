@@ -1,4 +1,5 @@
-import { post, get } from '@/service/http'
+import { request } from '@/config'
+
 import { IUserLoginReq, IUserLoginRes } from '@/interface/user'
 import { IMenuItem } from '@/interface/menu'
 
@@ -8,20 +9,15 @@ import flux from '@/core'
  * Login
  * @param data
  */
-export const login = (data: IUserLoginReq) => {
-  return post<IUserLoginRes>({
-    url: '/web/api/login',
-    data
-  })
+export const login = ({ username, password }: IUserLoginReq) => {
+  return request.post<IUserLoginRes>('/web/api/login', { username, password }, { load: true })
 }
 
 /**
  * logout
  */
 export const logout = () => {
-  return get({
-    url: '/web/api/logout'
-  }).then(() => {
+  return request.get('/web/api/logout').then(() => {
     flux.store.layout.resetNavList()
     flux.store.user.resetUserinfo()
     flux.util.storage.remove('token')
@@ -32,9 +28,7 @@ export const logout = () => {
 
 // api test
 export const apiTest = () => {
-  return get({
-    url: '/web/api/test'
-  })
+  return request.get('/web/api/test')
 }
 
 /**
@@ -42,14 +36,9 @@ export const apiTest = () => {
  * @param uid
  */
 export async function getUserMenu(uid: string) {
-  return post<IMenuItem[]>({
-    url: '/web/api/user/getUserMenu',
-    data: { uid }
-  })
+  return request.post<IMenuItem>('/web/api/user/getUserMenu', uid)
 }
 
 export const resource = () => {
-  return get({
-    url: '/web/api/user/resource'
-  })
+  return request.get('/web/api/user/resource')
 }

@@ -1,7 +1,5 @@
-import { post, get } from '@/service/http'
+import { request } from '@/config'
 
 export const getBookList = () => {
-  return get({
-    url: '/web/api/book/getBookList'
-  })
+  return request.post('/web/api/book/getBookList')
 }

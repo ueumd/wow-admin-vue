@@ -70,7 +70,7 @@ function repResolve(response: AxiosResponse) {
 
 // 响应拦截错误处理
 function repReject(error: any) {
-  let { code, message } = error.response.data || {}
+  let { code, message } = error || {}
   if (util.isNullOrUnDef(code)) {
     // 未知错误
     code = -1

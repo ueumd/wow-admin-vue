@@ -1,7 +1,5 @@
-import { Book } from '@/interface/book'
-
 export interface IPageInfo {
-  recordList: Book[]
+  recordList: Array<any>
   totalCount: number
   // 判断时候显示分页
   pageCount: number
