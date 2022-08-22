@@ -1,6 +1,8 @@
 {
   "globals": {
     "EffectScope": true,
+    "ElMessage": true,
+    "ElMessageBox": true,
     "acceptHMRUpdate": true,
     "axios": true,
     "computed": true,

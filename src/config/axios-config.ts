@@ -57,6 +57,8 @@ request.requestStart = (config: IAxiosRequestConfig) => {
     }
     requestNum += 1
   }
+  config.headers!.Authorization = util.storage.get('token')
+  return config
 }
 
 request.requestEnd = (config: IAxiosRequestConfig) => {
@@ -79,11 +81,10 @@ request.dataFactory = (response: IAxiosResponse) => {
   }
   Promise.reject({ message: ErrMessageInfo.errorMessage })
 }
-
 // 异常处理
 request.requestError = (error: AxiosError) => {
   // console.error(`【接口异常： 】`, error)
-  const { response, code, message, data } = error || {}
+  const { response, code, message } = error || {}
   if (code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {
     return { message: ErrMessageInfo.apiTimeoutMessage }
   }
